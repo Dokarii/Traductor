@@ -40,10 +40,10 @@ function App() {
         {/* En móvil: columna (flex-col). En desktop: dos columnas iguales (lg:grid lg:grid-cols-2) */}
         <main className="flex flex-col lg:grid lg:grid-cols-2 gap-4 md:gap-6 lg:gap-10 flex-1 min-h-0 pb-2">
 
-          {/* Panel Input: En móvil, shrink-0 para que no se encoja. En desktop, h-full. */}
-          <div className="flex flex-col rounded-3xl p-4 md:p-6 lg:p-8 shadow-neo-out bg-neo-bg shrink-0 lg:h-full lg:min-h-0">
-            {/* Textarea con altura fija en móvil, flexible en desktop */}
-            <div className="flex flex-col gap-2 w-full">
+          {/* Panel Input: shrink-0 en móvil (altura fija). En desktop: h-full con flex-col para que el textarea crezca. */}
+          <div className="flex flex-col rounded-3xl p-4 md:p-6 lg:p-8 shadow-neo-out bg-neo-bg shrink-0 lg:flex-1 lg:h-full lg:min-h-0">
+            {/* Textarea: altura fija en móvil, flex-1 en desktop para ocupar el espacio disponible */}
+            <div className="flex flex-col gap-2 w-full lg:flex-1 lg:min-h-0">
               <label className="text-sm font-semibold tracking-wide ml-1 shrink-0">
                 Texto Original
               </label>
@@ -51,7 +51,7 @@ function App() {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Pegar texto aquí..."
-                className="w-full p-4 rounded-xl bg-neo-bg shadow-neo-in focus:outline-none resize-none text-neo-text placeholder-neo-text/50 transition-shadow h-28 lg:h-auto lg:flex-1 lg:min-h-[150px]"
+                className="w-full p-4 rounded-xl bg-neo-bg shadow-neo-in focus:outline-none resize-none text-neo-text placeholder-neo-text/50 transition-shadow h-28 lg:h-auto lg:flex-1 lg:min-h-0"
               />
             </div>
 
