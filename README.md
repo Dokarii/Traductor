@@ -1,15 +1,15 @@
 # Traductor di canzoni
 
-Un traductor web potenciado por Inteligencia Artificial enfocado en capturar la intención, emoción y jerga del texto original, dejando atrás las traducciones literales y robóticas de los traductores de toda la vida.
+Un traductor web potenciado con Inteligencia Artificial que entiende de verdad lo que se quiere decir: el tono, la actitud y hasta el _slang_, sin esas traducciones rígidas y artificiales de los traductores tradicionales
 
-En un principio lo diseñé para traducir letras de canciones (gracias a que respeta una correspondencia estricta línea por línea), la aplicación funciona perfectamente para traducir párrafos completos, diálogos, posts en redes sociales o cualquier texto sin ningún problema. 
+En un principio lo diseñé para traducir letras de canciones (porque respeta al pie la correspondencia línea por línea), pero la aplicación funciona perfectamente para traducir párrafos completos, diálogos, posts en redes sociales o cualquier texto sin ningún problema. 
 
-> **Nota sobre los idiomas:** Este proyecto fue pensado originalmente para enfocarse en inglés y japonés, pero el motor de IA integrado puede traducir todos los idiomas al Español Latinoamericano de manera igual de fluida.
+> **Nota sobre los idiomas:** Este proyecto nació pensado principalmente en inglés y japonés, pero el modelo de IA integrado traduce cualquier idioma al español latinoamericano con la misma naturalidad
 
 ## Características Principales
 
-- **Traductor Cultural (No Literal):** Identifica el *slang* (jerga) y lo sustituye por la emoción o actitud equivalente en español casual. (Ej. No traduce "low-key salty" como "bajito molesta", sino como "en el fondo está picada").
-- **Estructura 1:1:** Ideal para creadores de subtítulos. Devuelve la traducción respetando exactamente la misma cantidad de líneas y saltos de párrafo que el texto original.
+- **Traductor Cultural (Nada de traducciones literales):** Detecta la jerga (como “low-key salty” o “ghosted”) y la convierte en la actitud o emoción que realmente transmite en español cotidiano (por ejemplo, no dice “bajito molesta” (low-key salty), sino “en el fondo está picada”)
+- **Estructura 1:1:** Ideal para creadores de subtítulos. Devuelve exactamente el mismo número de líneas, sin fusionar ni dividir, respetando cada salto de párrafo
 - **Diseño Neumórfico:** Interfaz ultra limpia, responsiva y sin scrollbars globales para mantener el enfoque solo en el texto.
 - **Zonas Click-to-Copy:** Copia al portapapeles de manera independiente la línea original o su traducción con un solo clic.
 - **Arquitectura Segura:** Usa Serverless Functions (Vercel) como backend proxy para ocultar y proteger la API Key.
