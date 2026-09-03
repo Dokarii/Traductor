@@ -26,7 +26,8 @@ export async function translateText(text) {
     }
 
     if (!response.ok) {
-      throw new Error(data.error || \`Error HTTP \${response.status} del servidor.\`);
+      // CORRECCIÓN SINTÁCTICA: Evitar backticks escapados que rompían el build de Vite
+      throw new Error(data.error || "Error HTTP " + response.status + " del servidor.");
     }
 
     const translatedText = data.translatedText;
