@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <div className="h-screen w-screen p-4 md:p-6 font-sans selection:bg-neo-dark/20 overflow-hidden flex flex-col bg-neo-bg">
+    <div className="h-[100dvh] w-full p-4 md:p-6 font-sans selection:bg-neo-dark/20 overflow-hidden flex flex-col bg-neo-bg">
       <div className="max-w-[1600px] w-full mx-auto flex flex-col gap-4 md:gap-6 flex-1 min-h-0">
         <header className="flex items-center justify-between px-4 shrink-0">
           <h1 className="text-2xl font-bold tracking-tight text-neo-text drop-shadow-sm">

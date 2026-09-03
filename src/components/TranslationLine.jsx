@@ -38,9 +38,9 @@ export default function TranslationLine({ item, casingOption }) {
     <div className="relative w-full p-2 mb-6 rounded-2xl shadow-neo-out bg-neo-bg flex flex-col gap-1 select-none">
       
       {/* Zona Clicable: Traducción */}
-      <div 
+      <button 
         onClick={() => handleCopy(formattedTranslated, 'translated')}
-        className={`relative p-3 rounded-xl cursor-pointer transition-all duration-200 ${
+        className={`relative w-full text-left p-3 rounded-xl cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-text/20 ${
           copiedTarget === 'translated' 
             ? 'shadow-neo-in-sm bg-neo-bg scale-[0.99]' 
             : 'hover:bg-neo-text/5 active:scale-[0.99]'
@@ -54,15 +54,15 @@ export default function TranslationLine({ item, casingOption }) {
         <p className="font-semibold text-lg text-neo-text leading-snug pr-16">
           {formattedTranslated}
         </p>
-      </div>
+      </button>
 
       {/* Separador sutil */}
       <div className="w-11/12 h-[1px] bg-neo-dark/10 self-center rounded-full" />
 
       {/* Zona Clicable: Original */}
-      <div 
+      <button 
         onClick={() => handleCopy(formattedOriginal, 'original')}
-        className={`relative p-3 rounded-xl cursor-pointer transition-all duration-200 ${
+        className={`relative w-full text-left p-3 rounded-xl cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-text/20 ${
           copiedTarget === 'original' 
             ? 'shadow-neo-in-sm bg-neo-bg scale-[0.99]' 
             : 'hover:bg-neo-text/5 active:scale-[0.99]'
@@ -76,7 +76,7 @@ export default function TranslationLine({ item, casingOption }) {
         <p className="text-sm font-medium text-neo-text/60 leading-snug pr-16">
           {formattedOriginal}
         </p>
-      </div>
+      </button>
 
     </div>
   );
