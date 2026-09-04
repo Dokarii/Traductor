@@ -43,6 +43,15 @@ export async function translateText(text) {
 
       let translated = translatedLines[index] || originalLine;
       translated = translated.trim();
+      let romanization = null;
+
+      if (translated.includes('|||')) {
+        const parts = translated.split('|||');
+        translated = parts[0].trim();
+        romanization = parts[1].trim();
+      } else {
+        translated = translated.trim();
+      }
       
       // Eliminar punto final
       if (translated.endsWith('.') && !translated.endsWith('..')) {
@@ -52,7 +61,8 @@ export async function translateText(text) {
       return {
         id: crypto.randomUUID(),
         original: originalLine,
-        translated: translated 
+        translated: translated,
+        romanization: romanization || null
       };
     }).filter(Boolean);
 

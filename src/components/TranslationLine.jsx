@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function TranslationLine({ item, casingOption }) {
-  const [copiedTarget, setCopiedTarget] = useState(null); // 'translated' | 'original' | null
+  const [copiedTarget, setCopiedTarget] = useState(null); // 'translated' | 'romanization' | 'original' | null
 
   // Lógica dinámica de mayúsculas/minúsculas
   const formatText = (text, type) => {
@@ -77,6 +77,37 @@ export default function TranslationLine({ item, casingOption }) {
           {formattedOriginal}
         </p>
       </button>
+
+      {/* Zona Clicable: Romanización / Pronunciación (solo si aplica) */}
+      {item.romanization && (
+        <>
+          {/* Separador sutil */}
+          <div className="w-11/12 h-[1px] bg-neo-dark/10 self-center rounded-full" />
+
+          <button
+            onClick={() => handleCopy(item.romanization, 'romanization')}
+            className={`relative w-full text-left p-3 rounded-xl cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neo-text/20 ${
+              copiedTarget === 'romanization'
+                ? 'shadow-neo-in-sm bg-neo-bg scale-[0.99]'
+                : 'hover:bg-neo-text/5 active:scale-[0.99]'
+            }`}
+          >
+            {copiedTarget === 'romanization' && (
+              <span className="absolute top-1/2 -translate-y-1/2 right-4 text-xs font-bold text-green-600/80">
+                ¡Copiado!
+              </span>
+            )}
+            <div className="flex items-center gap-2 pr-16">
+              <span className="shrink-0 text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md shadow-neo-in opacity-50">
+                rom.
+              </span>
+              <p className="text-sm font-medium text-neo-text/70 leading-snug italic font-mono">
+                {item.romanization}
+              </p>
+            </div>
+          </button>
+        </>
+      )}
 
     </div>
   );
