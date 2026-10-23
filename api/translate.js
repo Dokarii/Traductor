@@ -30,10 +30,10 @@ export default async function handler(req, res) {
   if (cleanText.length === 0) return res.status(400).json({ error: 'El texto no puede estar vacío.' });
   if (cleanText.length > 5000) return res.status(413).json({ error: 'Excede el límite de 5000 caracteres.' });
 
-  const API_KEY = process.env.QWEN_API_KEY;
-  if (!API_KEY) return res.status(500).json({ error: 'API Key no configurada en el servidor (Vercel).' });
+  const API_KEY = process.env.GEMINI_API_KEY;
+  if (!API_KEY) return res.status(500).json({ error: 'API Key de Gemini no configurada en el servidor (Vercel).' });
 
-  const API_URL = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions';
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
   const systemPrompt = `Eres un traductor especializado. Tu tarea principal es traducir texto al español cotidiano de forma natural.
 
@@ -68,22 +68,24 @@ FORMATO DE SALIDA POR LÍNEA:
 - Si el idioma fuente usa escritura NO LATINA: devuelve la traducción, luego " ||| " (espacio, tres pipes, espacio), luego la romanización de la línea ORIGINAL.
   Ejemplo: Traducción al español ||| romanizacion del original
 
-El separador es exactamente: " ||| " (un espacio, tres barras verticales, un espacio).`.trim();
+El separador es exactamente: " ||| " (un espacio, tres barras verticales, un espacio).`;
 
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'qwen-plus',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: cleanText }
+        system_instruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: [
+          { role: 'user', parts: [{ text: cleanText }] }
         ],
-        temperature: 0.7
+        generationConfig: {
+          temperature: 0.7
+        }
       })
     });
 
@@ -93,16 +95,16 @@ El separador es exactamente: " ||| " (un espacio, tres barras verticales, un esp
     try {
       data = JSON.parse(responseText);
     } catch (err) {
-      console.error("Respuesta no-JSON de Qwen:", responseText);
+      console.error("Respuesta no-JSON de Gemini:", responseText);
       return res.status(502).json({ error: 'El proveedor de Inteligencia Artificial devolvió un formato inválido.' });
     }
 
     if (!response.ok) {
-      console.error("Error devuelto por Qwen:", data);
+      console.error("Error devuelto por Gemini:", data);
       return res.status(response.status).json({ error: data.error?.message || 'El proveedor de IA rechazó la solicitud.' });
     }
 
-    const translatedText = data.choices?.[0]?.message?.content;
+    const translatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!translatedText) {
       return res.status(502).json({ error: 'La respuesta de la IA llegó vacía.' });
     }
