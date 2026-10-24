@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   const API_KEY = process.env.GEMINI_API_KEY;
   if (!API_KEY) return res.status(500).json({ error: 'API Key de Gemini no configurada en el servidor (Vercel).' });
 
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${API_KEY}`;
 
   const systemPrompt = `Eres un traductor especializado. Tu tarea principal es traducir texto al español cotidiano de forma natural.
 
