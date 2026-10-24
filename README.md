@@ -8,7 +8,7 @@ En un principio lo diseñé para traducir letras de canciones (porque respeta al
 
 ## Características Principales
 
-- **Traductor Cultural (Nada de traducciones literales):** Detecta la jerga (como “low-key salty” o “ghosted”) y la convierte en la actitud o emoción que realmente transmite en español cotidiano (por ejemplo, no dice “bajito molesta” (low-key salty), sino “en el fondo está picada”)
+- **Traductor Cultural (Nada de traducciones literales):** Detecta la jerga (como "low-key salty" o "ghosted") y la convierte en la actitud o emoción que realmente transmite en español cotidiano (por ejemplo, no dice "bajito molesta" (low-key salty), sino "en el fondo está picada")
 - **Estructura 1:1:** Ideal para creadores de subtítulos. Devuelve exactamente el mismo número de líneas, sin fusionar ni dividir, respetando cada salto de párrafo
 - **Diseño Neumórfico:** Interfaz ultra limpia, responsiva y sin scrollbars globales para mantener el enfoque solo en el texto.
 - **Zonas Click-to-Copy:** Copia al portapapeles de manera independiente la línea original o su traducción con un solo clic.
@@ -18,7 +18,7 @@ En un principio lo diseñé para traducir letras de canciones (porque respeta al
 
 - **Frontend:** React + Vite + Tailwind CSS
 - **Backend:** Vercel Serverless Functions (`/api/translate`)
-- **Inteligencia Artificial:** Qwen-Plus (Alibaba DashScope API) con *Few-Shot Prompting* avanzado.
+- **Inteligencia Artificial:** Gemini 3.8 Flash (Google AI) con *Few-Shot Prompting* avanzado.
 
 ## Seguridad Implementada
 
@@ -26,6 +26,16 @@ En un principio lo diseñé para traducir letras de canciones (porque respeta al
 - Protección Rate Limiting en memoria para evadir spam y bots.
 - Validación estricta de entradas (Rechazo de textos vacíos y límite seguro de 5000 caracteres por request).
 - Cabeceras estrictas HTTP inyectadas vía `vercel.json` (CSP, HSTS, X-Frame-Options).
+
+## Historial de cambios relevantes
+
+### Migración de Qwen a Gemini *(octubre 2025)*
+El proyecto originalmente utilizaba **Qwen-Plus** de Alibaba Cloud (DashScope) como modelo de IA. Debido al agotamiento de los créditos gratuitos de esa plataforma y a que su capa gratuita no se restablece de forma conveniente, se migró el backend a **Gemini 3.8 Flash** de Google AI.
+
+Beneficios del cambio:
+- Créditos gratuitos con mayor disponibilidad y restablecimiento periódico.
+- Sin cambios en la experiencia del usuario ni en la calidad de las traducciones.
+- La variable de entorno cambió de `QWEN_API_KEY` a `GEMINI_API_KEY`.
 
 ## Desarrollo Local
 
@@ -39,9 +49,9 @@ Para correr este proyecto en tu máquina local solo debes seguir estos pasos:
    ```
 
 2. **Configura tu entorno:**
-   Crea un archivo `.env.local` en la raíz del proyecto y pega tu llave de Qwen:
+   Crea un archivo `.env.local` en la raíz del proyecto y pega tu llave de Gemini (obtenla gratis en [Google AI Studio](https://aistudio.google.com/apikey)):
    ```env
-   QWEN_API_KEY=tu_api_key_aqui
+   GEMINI_API_KEY=tu_api_key_aqui
    ```
 
 3. **Inicia el entorno de pruebas:**
